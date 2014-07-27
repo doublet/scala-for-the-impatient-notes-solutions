@@ -1,4 +1,4 @@
-object Chapter1 {
+object Chapter01 {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
   
   // 1. In the Scala REPL, type 3. followed by the Tab key. What methods can be
@@ -57,7 +57,7 @@ object Chapter1 {
   // probablePrime(100, Random) , without any qualifiers before probablePrime and Random ?
   println("Normally, we'd use BigInt.probablePrime(100, scala.util.Random)")
                                                   //> Normally, we'd use BigInt.probablePrime(100, scala.util.Random)
-  BigInt.probablePrime(100, scala.util.Random)    //> res2: scala.math.BigInt = 1101870616643576275163028478561
+  BigInt.probablePrime(100, scala.util.Random)    //> res2: scala.math.BigInt = 822372260572592026348507621783
   
   import BigInt.probablePrime
   import util.Random
@@ -67,12 +67,12 @@ object Chapter1 {
   println("We're importing BigInt.probablePrime, which is a function, not a companion object according to ScalaDoc. Not sure how that works")
                                                   //> We're importing BigInt.probablePrime, which is a function, not a companion 
                                                   //| object according to ScalaDoc. Not sure how that works
-  probablePrime(100, Random)                      //> res3: scala.math.BigInt = 660628308996628911784627254461
+  probablePrime(100, Random)                      //> res3: scala.math.BigInt = 641268587367894032542971864803
 
   // 8. One way to create random file or directory names is to produce a random
   // BigInt and convert it to base 36, yielding a string such as "qsnvbevtomcj38o06kul" .
   // Poke around Scaladoc to find a way of doing this in Scala.
-  probablePrime(100, Random).toString(36)         //> res4: String = 2hznunvpbxcb4j27tjej
+  probablePrime(100, Random).toString(36)         //> res4: String = 2avk1aioy6f7gpmj4w2d
   println("This generates a random value, then displays it as a string in base 36. toString(radix: Int) is defined in the BigInt class")
                                                   //> This generates a random value, then displays it as a string in base 36. toS
                                                   //| tring(radix: Int) is defined in the BigInt class
