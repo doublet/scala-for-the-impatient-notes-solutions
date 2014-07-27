@@ -243,6 +243,122 @@ object Chapter02 {
     // ... cleanup
   }                                               //> Can't be negative
   
+  /*** Exercices ***/
+  
+  // 1. The signum of a number is 1 if the number is positive, –1 if it is negative, and 0
+  // if it is zero. Write a function that computes this value.
+  def signum(num: Int) = {
+    if(num == 0) 0
+    else if(num < 0) -1
+    else 1
+  }                                               //> signum: (num: Int)Int
+  
+  signum(0)                                       //> res22: Int = 0
+  signum(-20)                                     //> res23: Int = -1
+  signum(63)                                      //> res24: Int = 1
+  
+  // 2. What is the value of an empty block expression {} ? What is its type?
+  val v = {}                                      //> v  : Unit = ()
+  // the value is (), it type is Unit
+  
+  // 3. Come up with one situation where the assignment x = y = 1 is valid in Scala.
+  // (Hint: Pick a suitable type for x .)
+  
+  // Remember that (val y = 1) will return (): Unit
+  // using vars because we can't reassign vals
+  var x: Unit = ()                                //> x  : Unit = ()
+  var y = 0                                       //> y  : Int = 0
+  x = y = 1
+  x.toString                                      //> res25: String = ()
+  y                                               //> res26: Int = 1
+  
+  // 4. Write a Scala equivalent for the Java loop
+  // for (int i = 10; i >= 0; i--) System.out.println(i);
+  
+  // remember definitions? (intermediary values)
+  for(i <- 0 to 10; j = 10 - i)
+  	println(j)                                //> 10
+                                                  //| 9
+                                                  //| 8
+                                                  //| 7
+                                                  //| 6
+                                                  //| 5
+                                                  //| 4
+                                                  //| 3
+                                                  //| 2
+                                                  //| 1
+                                                  //| 0
+  
+  // 5. Write a procedure countdown(n: Int) that prints the numbers from n to 0.
+  def countdown(n: Int) {
+  	for(i <- 0 to n; j = n - i)
+  	  print(j + " ")
+  }                                               //> countdown: (n: Int)Unit
+  
+  countdown(5)                                    //> 5 4 3 2 1 0 
+  countdown(12)                                   //> 12 11 10 9 8 7 6 5 4 3 2 1 0 
+  
+  // 6. Write a for loop for computing the product of the Unicode codes of all letters
+  // in a string. For example, the product of the characters in "Hello" is 9415087488L .
+  def unicodeProduct(input: String): Long = {
+    var result: Long = 1
+    for(c <- input) result *= c
+    result
+  }                                               //> unicodeProduct: (input: String)Long
+  
+  unicodeProduct("Hello")                         //> res27: Long = 9415087488
+  
+  // 7. Solve the preceding exercise without writing a loop. (Hint: Look at the StringOps
+  // Scaladoc.)
+  
+  //"Hello".reduce( (acc: Int, n: Int) => { acc * n } )
+  var result: Long = 1                            //> result  : Long = 1
+  "Hello".foreach( (n) => result *= n )
+  result                                          //> res28: Long = 9415087488
+  
+  //8. Write a function product(s : String) that computes the product, as described
+  // in the preceding exercises.
+  def product(input: String): Long = {
+    var result: Long = 1
+    input.foreach( (n) => result *= n )
+    input.foreach( (n) => print(" Numeric: " + n.toInt) )
+    result
+  }                                               //> product: (input: String)Long
+  
+  product("Hello")                                //>  Numeric: 72 Numeric: 101 Numeric: 108 Numeric: 108 Numeric: 111res29: Long
+                                                  //|  = 9415087488
+  
+  // 9. Make the function of the preceding exercise a recursive function.
+  def recursiveProduct(input: String): Long = {
+  	input.head * (if(input.length == 1) 1 else recursiveProduct(input.tail))
+  }                                               //> recursiveProduct: (input: String)Long
+  
+  recursiveProduct("Hello")                       //> res30: Long = 9415087488
+  
+  // 10. Write a function that computes x n , where n is an integer. Use the following
+  // recursive definition:
+  // • x^n = y^2 if n is even and positive, where y = x^(n/2)
+  // • x^n = x· x^(n-1) if n is odd and positive.
+  // • x^0 = 1
+  // • x^n = 1/(x^-n) if n is negative.
+  // Don’t use a return statement.
+  def power(x: Double, n: Int): Double = {
+    if(n < 0) 1 / power(x, -n)
+    else if(n == 0) 1
+    else //x * power(x, n - 1)
+      if(n % 2 == 0) power(x*x, n/2) // n is even and positive
+      else x * power(x, n - 1)
+      
+  }                                               //> power: (x: Double, n: Int)Double
+  
+  power(2, 4)                                     //> res31: Double = 16.0
+  math.pow(2, 4)                                  //> res32: Double = 16.0
+  
+  power(-2, 5)                                    //> res33: Double = -32.0
+  math.pow(-2, 5)                                 //> res34: Double = -32.0
+  
+  
+  
   print("That's all, folks!")
 
 }
